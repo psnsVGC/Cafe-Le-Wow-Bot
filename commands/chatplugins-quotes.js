@@ -47,7 +47,7 @@ exports.commands = {
 	getquote: 'quote',
 	quote: function (arg, by, room, cmd) {
 		if (cmd === "addquote" || cmd === "setquote") {
-			if (!this.isRanked('admin')) return false;
+			if (!this.isRanked('driver')) return false;
 			var args = arg.split(",");
 			if (args.length < 2) return this.reply(this.trad('u1') + ": " + this.cmdToken + cmd + " " + this.trad('u2'));
 			var id = toId(args[0]);
@@ -67,7 +67,7 @@ exports.commands = {
 			this.sclog();
 			this.reply(text);
 		} else if (cmd === "delquote") {
-			if (!this.isRanked('admin')) return false;
+			if (!this.isRanked('driver')) return false;
 			var id = toId(arg);
 			if (!id) return this.reply(this.trad('noid'));
 			if (!quotes[id]) return this.reply(this.trad('quote') + ' "' + id + '" ' + this.trad('n'));
@@ -87,7 +87,7 @@ exports.commands = {
 		}
 	},
 	listquotes: function (arg, by, room, cmd) {
-		if (!this.isRanked('admin')) return false;
+		if (!this.isRanked('driver')) return false;
 		var data = '';
 		for (var i in quotes) {
 			data += i + ' -> ' + quotes[i] + '\n';
@@ -98,64 +98,67 @@ exports.commands = {
 			else this.pmReply(this.trad('err'));
 		}.bind(this));
 	},
-	/*
-	* Jokes
-	*/
-	addjoke: 'joke',
-	setjoke: 'joke',
-	deljoke: 'joke',
-	getjoke: 'joke',
-	joke: function (arg, by, room, cmd) {
-		if (cmd === "addjoke" || cmd === "setjoke") {
-			if (!this.isRanked('admin')) return false;
+	
+// ............... 
+// Recipe Commands 
+// ............... 
+
+	setrecipe: 'recipe',
+	delrecipe: 'recipe',
+	getrecipe: 'recipe',
+	addrecipe: 'recipe',
+	recipe: function (arg, by, room, cmd) {
+		if (cmd === "addrecipe" || cmd === "addrecipe") {
+			if (!this.isRanked('driver')) return false;
 			var args = arg.split(",");
-			if (args.length < 2) return this.reply(this.trad('u1') + ": " + this.cmdToken + cmd + " " + this.trad('u2'));
+			if (args.length < 2) return this.reply('__**Usage:**__ __=addrecipe__ __Recipe Name__, __Recipe__');
 			var id = toId(args[0]);
-			if (!id) return this.reply(this.trad('noid'));
+			if (!id) return this.reply('__**Usage:**__ __=addrecipe__ __Recipe Name__, __Recipe__');
 			args.splice(0, 1);
 			var content = Tools.stripCommands(args.join(',').trim());
 			if (!content) return this.reply(this.trad('u1') + ": " + this.cmdToken + cmd + " " + this.trad('u2'));
-			if (jokes[id] && cmd !== "setjoke") return this.reply(this.trad('joke') + ' "' + id + '" ' + this.trad('already'));
+			if (jokes[id] && cmd !== "setjoke", jokes[id] && cmd !== "setrecipe") return this.reply(this.trad('joke') + ' "' + id + '" ' + this.trad('already'));
 			var text;
 			if (jokes[id]) {
-				text = this.trad('joke') + ' "' + id + '" ' + this.trad('modified');
+				text = this.reply('The Recipe "'+ id +'" has been successfully modified!');
 			} else {
-				text = this.trad('joke') + ' "' + id + '" ' + this.trad('created');
+				text = this.reply('The Recipe "'+ id +'" has been successfully added!');
 			}
 			jokes[id] = content;
 			saveJokes();
 			this.sclog();
 			this.reply(text);
-		} else if (cmd === "deljoke") {
-			if (!this.isRanked('admin')) return false;
+		} else if (cmd === "delrecipe") {
+			if (!this.isRanked('driver')) return false;
 			var id = toId(arg);
-			if (!id) return this.reply(this.trad('noid'));
-			if (!jokes[id]) return this.reply(this.trad('joke') + ' "' + id + '" ' + this.trad('n'));
+			if (!id) return this.reply('The Recipe "'+ id +'" does not exist.');
+			if (!jokes[id]) return this.reply('The Recipe "'+ id +'" does not exist.');
 			delete jokes[id];
 			saveJokes();
 			this.sclog();
-			this.reply(this.trad('joke') + ' "' + id + '" ' + this.trad('d'));
-		} else if (cmd === "getjoke") {
+			this.reply('The Recipe "'+ id +'" has been successfully deleted!');
+		} else if (cmd === "getrecipe") {
 			var id = toId(arg);
-			if (!id) return this.reply(this.trad('noid'));
-			if (!jokes[id]) return this.restrictReply(this.trad('joke') + ' "' + id + '" ' + this.trad('n'), 'joke');
+			if (!id) return this.reply('You must specify a vaild Recipe!');
+			if (!jokes[id]) return this.restrictReply('You must specify a valid Recipe!');
 			return this.restrictReply(Tools.stripCommands(jokes[id]), "joke");
 		} else {
 			var joke = rand(jokes);
-			if (joke === null) return this.restrictReply(this.trad('empty'), "joke");
+			if (joke === null) return this.restrictReply('There are no Recipes :o');
 			return this.restrictReply(Tools.stripCommands(joke), "joke");
 		}
 	},
-	listjokes: function (arg, by, room, cmd) {
-		if (!this.isRanked('admin')) return false;
+	listrecipes: 'listrecipe',
+	listrecipe: function (arg, by, room, cmd) {
+		if (!this.isRanked('driver')) return false;
 		var data = '';
 		for (var i in jokes) {
-			data += i + ' -> ' + jokes[i] + '\n';
+			data += i + ' => ' + jokes[i] + '\n';
 		}
-		if (!data) return this.reply(this.trad('empty'));
-		Tools.uploadToHastebin(this.trad('list') + ':\n\n' + data, function (r, link) {
-			if (r) return this.pmReply(this.trad('list') + ': ' + link);
-			else this.pmReply(this.trad('err'));
+		if (!data) return this.reply('There are no Recipes :o');
+		Tools.uploadToHastebin(('---If you would like to use any Recipes just copy and paste the URL into the browser.---') + '\n\n' + ('--List of Recipes:--') + '\n\n' + data, function (r, link) {
+			if (r) return this.restrictReply('__**List of Recipes:**__ ' + link);
+			else this.restrictReply('There are no Recipes :o');
 		}.bind(this));
 	}
 };

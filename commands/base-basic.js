@@ -8,23 +8,77 @@ exports.commands = {
 	credits: 'about',
 	bot: 'about',
 	about: function () {
-		this.restrictReply(this.trad('about') + ". " + this.trad('author') + ": " + Settings.package.author.name + ". (" + Settings.package.homepage + ")", 'info');
+		this.restrictReply('__**Pokémon Showdown Bot**__ __written in JavaScript for__ __**Café Le Wow**__ __by__ __**psns**__ __(Based on the bot made by__ __**Ecuacion**____).__');
+	},
+	
+	menus: 'menu',
+	menu: function () {
+		this.restrictReply('__**Menu:**__ http://cafelewows.weebly.com/');
+	},
+	
+    rko: 'rkod',
+	rkod: function (args, by) {
+		if (args = toId(args), args == 'psns') {
+			this.restrictReply("/me RKO's " + by + " outta no where! :^)");
+		}
+		else if (args = toId(args), args == 'gourgeist') {
+			this.restrictReply("/me RKO's " + by + " outta no where! :^)");
+		}
+		else if (args = toId(args), args == 'myself') {
+			this.restrictReply("/me RKO's " + by + " outta no where! :^)");
+		}
+		else if (args = toId(args), args == 'me') {
+			this.restrictReply("/me RKO's " + by + " outta no where! :^)");
+		}
+		else if (args.length < 1) {
+			this.restrictReply('You must specify someone to RKO.');
+		}
+        else { 
+			this.restrictReply("/me RKO's " + args + " outta no where!");
+		}
+	},
+
+	
+	slap: 'slaps',
+	slaps: function (args, by) {
+		if (args = toId(args), args == 'psns') {
+			this.restrictReply('/me slaps ' + by + ' across the face! :^)');
+		}
+		else if (args = toId(args), args == 'gourgeist') {
+			this.restrictReply('/me slaps ' + by + ' across the face :^)!');
+		}
+		else if (args = toId(args), args == 'myself') {
+			this.restrictReply('/me slaps ' + by + ' across the face! :^)');
+		}
+		else if (args = toId(args), args == 'me') {
+			this.restrictReply('/me slaps ' + by + ' across the face! :^)');
+		}
+		else if (args.length < 1) {
+			this.restrictReply('You must specify someone to slap.');
+		}
+        else { 
+			this.restrictReply('/me slaps ' + args + ' across the face!');
+		}
 	},
 
 	git: 'github',
 	github: function () {
-		if (Settings.package.repository) this.restrictReply(Tools.stripCommands(Settings.package.repository.url), 'info');
+       this.restrictReply('__**to the Café Le Wow!**__');
 	},
 
 	botversion: 'version',
 	version: function () {
-		this.restrictReply(Tools.stripCommands(Settings.package.version), 'info');
+		this.restrictReply('__**Beta**__');
 	},
 
 	guide: 'help',
 	botguide: 'help',
 	help: function () {
-		this.restrictReply(this.trad('guide') + ': ' + (Config.botguide || (Settings.package.homepage + "/blob/master/commands/README.md")), 'info');
+	if (!this.isRanked('driver', 'moderator', 'roomowner', 'leader', 'admin')) {
+			this.restrictReply('__**Bot guide:**__ http://bit.do/Bot-Guide');
+	} else {
+		this.restrictReply('__**Bot guide:**__ http://bit.do/Bot-Guide'); + this.pmReply('__**Bot staff guide:**__ http://bit.do/Bot-Saff-Guide');
+	}
 	},
 
 	bottime: 'time',
@@ -76,6 +130,7 @@ exports.commands = {
 	},
 
 	seen: function (arg, by, room, cmd) {
+	    if (!this.isRanked('driver')) return false;
 		var text = '';
 		arg = toId(arg);
 		if (!arg || arg.length > 18) return this.pmReply(this.trad('inv'));
@@ -149,5 +204,8 @@ exports.commands = {
 		if (!arg) return;
 		if (!this.can('say')) return;
 		this.reply(Tools.stripCommands(arg));
-	}
+	},
+	
 };
+
+

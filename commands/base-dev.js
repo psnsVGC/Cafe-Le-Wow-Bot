@@ -109,7 +109,7 @@ exports.commands = {
 				this.sclog();
 				var res = CommandParser.loadCommands(true) || [];
 				if (!res.length) {
-					return this.reply('Commands hotpatched');
+					return this.reply('__**Commands Reloaded!**__');
 				}
 				return this.reply('Some command files crashed: ' + res.join(", "));
 			case 'features':
