@@ -18,21 +18,6 @@ Basic features and some information about the bot.
  - `alts [user]` - List of known alts of an user (Alts detedted from namechanges)
  - `say [text]` - Force to say something
 
-Dynamic Commands
-------------
-
-Dynamic commads are commands saved in a JSON, used for commands that are continuously changing, like forum links or usage stats. Commands for using, creating, modifying and deleting dynamic commands are the following:
-
- - `dyn [cmd]` - To call a dynamic command
- - `wall [cmd]` - To call a dynamic command (with announce / wall)
- - `temp [text]` - Set temp var, to create a command
- - `setcmd [cmd]` - Create or modify a command, with `temp` data previosly set
- - `setalias [alias], [cmd]` - Set an alias of an existent dynamic command
- - `delcmd [cmd]` - Delete a command
- - `dyncmdlist` - Get the list of dynamic commands
-
-**NOTE:** You can use a dynamic just with `.command` (command character + command name) if there is not another static command with the same name. So you can use this to create only-text commands with ease.
-
 Chat Plugins
 ------------
 
@@ -68,12 +53,12 @@ Smogon-related commands:
 
 Commands for managing the local database of jokes and quotes:
 
- - `addquote [id], [text]` - Add a new quote
- - `delquote [id]` - Delete an existing quote
+ - `addquote [quote name], [text]` - Add a new quote
+ - `delquote [quote name]` - Delete an existing quote
  - `listquotes` - Upload quotes to hastebin
- - `addjoke [id], [text]` - Add a new joke
- - `deljoke [id]` - Delete an existing joke
- - `listjokes` - Upload jokes to hastebin
+ - `addrecipe [recipe name], [recipe URL]` - Adds a new recipe
+ - `delrecipe [recipe name]` - Deletes an existing recipe
+ - `listrecipes` - Uploads recipes to hastebin
 
 Administrative Commands
 ------------
@@ -278,33 +263,3 @@ Youtube
 Commands for Youtube link recognition feature
 
  - `youtube [on/off]` - Enable / Disable YouTube link recognition
-
-Auto-Invite
-------------
-
-Commands for auto-invite feature
-
-  - `reloadroomauth [room]` - Reload roomauth if the autoinvite feature is not working well
-  - `getroomauth [room]` - Upload roomauth to hastebin (dev command)
-
-Group Chats
-------------
-
-Automated Promotion
-
- - `setautorank [on/off]` - Enable or disable automated promotion in a room
- - `autorank [rank/off]` - Set the autopromotion rank for all users when joining the room
- - `autorank [user], [rank/deauth]` - Set the autopromotion rank for a single user
- - `listautorank` - Upload the autopromotion list to Hastebin
-
-Welcome private message. This can be spammable, much caution!
-
- - `wpm [enable / disable]` - Enable or disable this feature in a room. Only for excepted users.
- - `wpm view` - View the welcome private message set in a room
- - `setwpm [message]` - Set the welcome private message for a room
- - `delwpm` - Remove the welcome private message for a room
-
-Developing commands for GroupChats feature
-
- - `ignoregroupchat [groupchat]` - temporarily ignore a groupchat (to leave a groupchat). Then you must edit the config to make it permanent
- - `unignoregroupchat [groupchat]` - unignore a groupchat
