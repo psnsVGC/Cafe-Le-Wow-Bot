@@ -8,7 +8,7 @@ exports.commands = {
 	credits: 'about',
 	bot: 'about',
 	about: function () {
-		this.restrictReply('__**Pokémon Showdown Bot**__ __written in JavaScript for__ __**Café Le Wow**__ __by__ __**psns**__ __(Based on the bot made by__ __**Ecuacion**____).__');
+		this.restrictReply('__**Pokémon Showdown Bot**__ __written in JavaScript for__ __**Café Le Wow**__ __by__ __**psns** & **Zalm**__ __(Based on the bot made by__ __**Ecuacion**____).__');
 	},
 	
 	menus: 'menu',
@@ -21,7 +21,7 @@ exports.commands = {
 		if (args = toId(args), args == 'psns') {
 			this.restrictReply("/me RKO's " + by + " outta no where! :^)");
 		}
-		else if (args = toId(args), args == 'gourgeist') {
+		else if (args = toId(args), args == 'lespatula') {
 			this.restrictReply("/me RKO's " + by + " outta no where! :^)");
 		}
 		else if (args = toId(args), args == 'myself') {
@@ -44,7 +44,7 @@ exports.commands = {
 		if (args = toId(args), args == 'psns') {
 			this.restrictReply('/me slaps ' + by + ' across the face! :^)');
 		}
-		else if (args = toId(args), args == 'gourgeist') {
+		else if (args = toId(args), args == 'lespatula') {
 			this.restrictReply('/me slaps ' + by + ' across the face :^)!');
 		}
 		else if (args = toId(args), args == 'myself') {
@@ -63,7 +63,7 @@ exports.commands = {
 
 	git: 'github',
 	github: function () {
-       this.restrictReply('__**to the Café Le Wow!**__');
+       this.restrictReply('__**Le Spatula GitHub repository:**__ https://github.com/psnsVGC/Le-Spatula');
 	},
 
 	botversion: 'version',
