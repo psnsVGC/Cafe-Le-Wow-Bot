@@ -74,11 +74,7 @@ exports.commands = {
 	guide: 'help',
 	botguide: 'help',
 	help: function () {
-	if (!this.isRanked('driver', 'moderator', 'roomowner', 'leader', 'admin')) {
-			this.restrictReply('__**Bot guide:**__ http://bit.do/Bot-Guide');
-	} else {
-		this.restrictReply('__**Bot guide:**__ http://bit.do/Bot-Guide'); + this.pmReply('__**Bot staff guide:**__ http://bit.do/Bot-Saff-Guide');
-	}
+		this.restrictReply('__**Bot guide:**__ http://bit.do/Le-Spatula-Guide');
 	},
 
 	bottime: 'time',
