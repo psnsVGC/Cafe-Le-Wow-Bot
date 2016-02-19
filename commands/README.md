@@ -24,9 +24,9 @@ Chat Plugins
 Misc commands for multiple features:
 
  - `pick [option1], [option2], [...]` - Choose between multiple options
- - `randomanswer` - Get a random answer
- - `joke` - Get a random joke from the local database
- - `quote` - Get a random quote from the local database
+ - `randomanswer` - Gets a random answer
+ - `recipe` - Gets a random recipe from the local database
+ - `quote` - Gets a random quote from the local database
  - `regdate (username)` - Get the register date of a Pokemon Showdown account
  - `regtime (username)` - Get the age of a Pokemon Showdown account, useful for check if an account is autoconfirmed
 
